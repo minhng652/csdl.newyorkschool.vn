@@ -26,7 +26,7 @@
             height: 100%;
             margin: 0;
             padding: 0;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-family: sans-serif !important;
             background-color: #f4f6f9;
         }
         form#form1 {
@@ -59,7 +59,7 @@
             padding: 30px;
         }
         .row-space {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         .input-login {
             height: 40px;
@@ -87,7 +87,26 @@
             color: #fff;
         }
 
-        /* TÙY CHỈNH PHÔNG CHỮ SANS-SERIF VÀ THANH CUỘN (SCROLLBAR) */
+        /* Tiêu đề mục */
+        .section-title {
+            font-size: 14px !important;
+            font-weight: bold !important;
+            text-transform: uppercase;
+            color: #222 !important;
+            letter-spacing: 0.5px;
+            font-family: sans-serif !important;
+        }
+
+        /* Style chữ thông báo lỗi màu đỏ */
+        .error-message {
+            color: #ff0000;
+            font-size: 12px;
+            margin-top: 3px;
+            margin-bottom: 5px;
+            display: none;
+        }
+
+        /* TÙY CHỈNH PHÔNG CHỮ SANS-SERIF VÀ THANH CUỘN */
         .select2-container {
             font-family: sans-serif !important;
         }
@@ -125,10 +144,10 @@
             font-family: sans-serif !important;
         }
         
-        /* Cấu hình phần danh sách kết quả xổ xuống: hiển thị thanh cuộn dọc (scroll) bên phải */
+        /* Cấu hình phần danh sách kết quả xổ xuống có thanh cuộn */
         .select2-results__options {
-            max-height: 200px !important; /* Giới hạn chiều cao danh sách để hiện thanh cuộn */
-            overflow-y: auto !important;   /* Cho phép lăn chuột và hiện thanh cuộn bên phải */
+            max-height: 200px !important;
+            overflow-y: auto !important;
         }
 
         .select2-container--default .select2-results__option {
@@ -138,7 +157,7 @@
             padding: 8px 12px !important;
         }
         
-        /* Màu nền xám nhạt khi rê chuột (bỏ màu đỏ đô) */
+        /* Màu nền xám nhạt khi rê chuột */
         .select2-container--default .select2-results__option--highlighted[aria-selected] {
             background-color: #e5e5e5 !important; 
             color: #111 !important;
@@ -152,17 +171,22 @@
             font-family: sans-serif !important;
         }
 
-        /* Định dạng ô năm học chuẩn hệ thống */
-        .rcbInput {
+        /* Định dạng ô Năm học: Khóa, giao diện nổi bật, 1 mũi tên */
+        .rcbInput-locked {
             width: 100%;
             height: 38px;
             padding: 6px 30px 6px 12px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            background-color: #fff;
+            background-color: #fff !important;
             font-size: 13px;
             font-family: sans-serif !important;
-            color: #333;
+            color: #333 !important;
+            opacity: 1 !important;
+            cursor: default !important;
+            pointer-events: none;
+            display: inline-block;
+            box-sizing: border-box;
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
@@ -170,11 +194,6 @@
             background-repeat: no-repeat;
             background-position: right 10px center;
             background-size: 10px 6px;
-        }
-        .rcbInput:disabled {
-            background-color: #e9ecef !important;
-            cursor: not-allowed !important;
-            color: #aaa;
         }
 
         /* Captcha Styling */
@@ -316,33 +335,39 @@
                                             <!-- Form Credentials -->
                                             <div class="thongtin_dangnhap_qlth" style="margin-top: 15px;">
                                                 <div class="row-space">
-                                                    <span class="text-tieu-de" style="font-size: 13px; font-weight: bold; text-transform: uppercase; color: #333;">Tài khoản của bạn</span>
+                                                    <span class="section-title">TÀI KHOẢN CỦA BẠN</span>
                                                 </div>
-                                                <div class="row-space">
+                                                <div class="row-space" style="margin-bottom: 2px;">
                                                     <div class="input-group">
                                                         <input id="tbUsername" name="tbU" type="text" placeholder="Tên đăng nhập" class="form-control input-login"/>
                                                         <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
                                                     </div>
                                                 </div>
                                                 <div class="row-space">
+                                                    <div id="errUsername" class="error-message">Thông tin bắt buộc</div>
+                                                </div>
+
+                                                <div class="row-space" style="margin-bottom: 2px;">
                                                     <div class="input-group">
                                                         <input id="tbPassword" name="tbP" type="password" placeholder="Mật khẩu" class="form-control input-login"/>
                                                         <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                                                     </div>
+                                                </div>
+                                                <div class="row-space">
+                                                    <div id="errPassword" class="error-message">Nhập mật khẩu</div>
                                                 </div>
                                             </div>
 
                                             <!-- School / Department Selectors -->
                                             <div class="thongtin_donvi">
                                                 <div class="row-space">
-                                                    <span class="text-tieu-de" style="font-size: 13px; font-weight: bold; text-transform: uppercase; color: #333;">Thông tin đơn vị</span>
+                                                    <span class="section-title">THÔNG TIN ĐƠN VỊ</span>
                                                 </div>
                                                 
                                                 <!-- Ô Năm học -->
                                                 <div class="row-space">
-                                                    <select class="rcbInput" disabled="disabled">
-                                                        <option>Năm học 2026-2027</option>
-                                                        <option>Năm học 2025-2026</option>
+                                                    <select class="rcbInput-locked">
+                                                        <option selected="selected">Năm học 2026-2027</option>
                                                     </select>
                                                 </div>
                                                 
@@ -352,7 +377,7 @@
                                                         <option value="MN">Mầm non</option>
                                                         <option value="TH">Tiểu học</option>
                                                         <option value="THCS">Trung học cơ sở</option>
-                                                        <option value="THPT">Trung học phổ thông</option>
+                                                        <option value="THPT" selected="selected">Trung học phổ thông</option>
                                                         <option value="GDTX">Giáo dục thường xuyên</option>
                                                     </select>
                                                 </div>
@@ -360,7 +385,7 @@
                                                 <!-- Chọn Phường/Xã -->
                                                 <div class="row-space">
                                                     <select id="ddlPhuongXa" class="form-control" style="width: 100%;">
-                                                        <option value="">Chọn Phường/Xã</option>
+                                                       <option value="">Chọn Phường/Xã</option>
                                                         <option value="TT">Trường trực thuộc sở</option>
                                                         <option value="BaDinh">Phường Ba Đình</option>
                                                         <option value="BachMai">Phường Bạch Mai</option>
@@ -490,20 +515,23 @@
                                                 </div>
 
                                                 <!-- Chọn Trường -->
-                                                <div class="row-space">
+                                                <div class="row-space" style="margin-bottom: 2px;">
                                                     <select id="ddlTruong" class="form-control" style="width: 100%;">
                                                         <option value="">Chọn trường</option>
                                                         <option value="1" data-ward="BaDinh" data-level="MN">Trường mầm non Ba Đình - Phường Ba Đình</option>
-                                                        <option value="2" data-ward="HongHa" data-level="TH">Trường tiểu học Hồng Hà - Phường Hồng Hà</option>
-                                                        <option value="3" data-ward="BaDinh" data-level="THCS">Trường trung học cơ sở Ba Đình - Phường Ba Đình</option>
-                                                        <option value="4" data-ward="VinhHung" data-level="THPT">Trường trung học phổ thông Đặng Trần Đức - Phường Vĩnh Hưng</option>
-                                                        <option value="5" data-ward="OChoDua" data-level="GDTX">Trường học viện âm nhạc quốc gia - Phường Ô Chợ Dừa</option>
+                                                        <option value="2" data-ward="BaDinh" data-level="TH">Trường tiểu học Ba Đình - Phường Ba Đình</option>
+                                                        <option value="99" data-ward="BaDinh" data-level="TH,THCS,THPT">Trường Tiểu học, THCS và THPT New York - Phường Ba Đình</option>
+                                                        <option value="6" data-ward="" data-level="THPT">Trường trung học phổ thông Đặng Trần Đức - Toàn TP</option>
+                                                        <option value="7" data-ward="" data-level="THPT">Trường trung học phổ thông Hoàng Mai - Toàn TP</option>
                                                     </select>
+                                                </div>
+                                                <div class="row-space">
+                                                    <div id="errTruong" class="error-message">Thông tin bắt buộc</div>
                                                 </div>
                                             </div>
 
                                             <!-- Dynamic Captcha Box -->
-                                            <div class="row-space">
+                                            <div class="row-space" style="margin-bottom: 2px;">
                                                 <div class="captcha-box">
                                                     <input type="text" id="txtCaptchaInput" placeholder="nhập mã xác nhận" class="form-control"/>
                                                     <div class="captcha-img-wrapper">
@@ -513,6 +541,9 @@
                                                         <span class="glyphicon glyphicon-refresh"></span>
                                                     </button>
                                                 </div>
+                                            </div>
+                                            <div class="row-space">
+                                                <div id="errCaptcha" class="error-message">Thông tin bắt buộc</div>
                                             </div>
 
                                             <!-- Checkbox & Links -->
@@ -549,18 +580,22 @@
         </div>
     </form>
 
-    <!-- JavaScript xử lý logic lọc -->
+    <!-- JavaScript hỗ trợ kiểm tra mảng cấp học data-level (dùng .indexOf()) -->
     <script type="text/javascript">
         $(document).ready(function () {
-            // Khởi tạo Select2
-            $('#ddlCapHoc').select2({ placeholder: "Chọn Cấp học" });
-            $('#ddlPhuongXa').select2({ placeholder: "Chọn Phường/Xã" });
-            $('#ddlTruong').select2({ placeholder: "Chọn trường" });
+            $('#ddlCapHoc').val('THPT');
 
-            function updateFormLogic() {
+            $('#ddlCapHoc').select2({ placeholder: "Chọn Cấp học", minimumResultsForSearch: 0 });
+            $('#ddlPhuongXa').select2({ placeholder: "Chọn Phường/Xã", minimumResultsForSearch: 0 });
+            $('#ddlTruong').select2({ placeholder: "Chọn trường", minimumResultsForSearch: 0 });
+
+            var $allSchoolOptions = $('#ddlTruong option[value!=""]').clone();
+
+            function filterSchools() {
                 var selectedLevel = $('#ddlCapHoc').val();
                 var selectedWard = $('#ddlPhuongXa').val();
                 var $wardSelect = $('#ddlPhuongXa');
+                var $schoolSelect = $('#ddlTruong');
 
                 if (selectedLevel === 'THPT' || selectedLevel === 'GDTX') {
                     $wardSelect.val('').prop('disabled', true).trigger('change.select2');
@@ -569,35 +604,46 @@
                     $wardSelect.prop('disabled', false).trigger('change.select2');
                 }
 
-                $('#ddlTruong option').each(function () {
-                    var $opt = $(this);
-                    if ($opt.val() === "") return;
+                var currentSelectedSchool = $schoolSelect.val();
+                $schoolSelect.find('option[value!=""]').remove();
 
-                    var optLevel = $opt.attr('data-level');
-                    var optWard = $opt.attr('data-ward');
+                var matchingOptions;
 
-                    var matchLevel = (optLevel === selectedLevel);
-                    var matchWard = (selectedLevel === 'THPT' || selectedLevel === 'GDTX') ? true : (!selectedWard || optWard === selectedWard);
+                if (!selectedLevel) {
+                    matchingOptions = $allSchoolOptions;
+                } else {
+                    matchingOptions = $allSchoolOptions.filter(function () {
+                        var optLevels = $(this).attr('data-level').split(','); // Tách mảng cấp học (ví dụ: ["TH", "THCS", "THPT"])
+                        var optWard = $(this).attr('data-ward');
 
-                    if (matchLevel && matchWard) {
-                        $opt.prop('disabled', false);
-                    } else {
-                        $opt.prop('disabled', true);
-                    }
-                });
+                        // Kiểm tra xem cấp học người dùng chọn có nằm trong danh sách cấp của trường này không
+                        var matchLevel = (optLevels.indexOf(selectedLevel) !== -1);
+                        var matchWard = (selectedWard === "") ? true : (optWard === selectedWard);
 
-                $('#ddlTruong').val("").trigger('change.select2');
+                        return matchLevel && matchWard;
+                    });
+                }
+
+                if (matchingOptions.length > 0) {
+                    $schoolSelect.append(matchingOptions);
+                }
+
+                if (matchingOptions.filter('[value="' + currentSelectedSchool + '"]').length > 0) {
+                    $schoolSelect.val(currentSelectedSchool).trigger('change.select2');
+                } else {
+                    $schoolSelect.val("").trigger('change.select2');
+                }
             }
 
             $('#ddlCapHoc').on('change', function () {
-                updateFormLogic();
+                filterSchools();
             });
 
             $('#ddlPhuongXa').on('change', function () {
-                updateFormLogic();
+                filterSchools();
             });
 
-            updateFormLogic();
+            filterSchools();
 
             // Captcha Logic
             var currentCaptcha = "";
@@ -617,25 +663,50 @@
                 $('#txtCaptchaInput').val('').focus();
             });
 
-            // Nút Đăng nhập
+            // Ẩn lỗi khi người dùng bắt đầu nhập hoặc chọn lại
+            $('#tbUsername').on('input', function() { $('#errUsername').hide(); });
+            $('#tbPassword').on('input', function() { $('#errPassword').hide(); });
+            $('#ddlTruong').on('change', function() { $('#errTruong').hide(); });
+            $('#txtCaptchaInput').on('input', function() { $('#errCaptcha').hide(); });
+
+            // Nút Đăng nhập & Kiểm tra lỗi hiển thị thông báo
             $('#btnSubmitLogin').click(function () {
                 var username = $('#tbUsername').val().trim();
                 var password = $('#tbPassword').val().trim();
+                var selectedSchool = $('#ddlTruong').val();
                 var userInput = $('#txtCaptchaInput').val().trim().replace(/\s+/g, '');
 
+                var hasError = false;
+
                 if (username === "") {
-                    alert("Vui lòng nhập Tên đăng nhập!");
-                    $('#tbUsername').focus();
-                    return;
+                    $('#errUsername').show();
+                    hasError = true;
+                } else {
+                    $('#errUsername').hide();
                 }
+
                 if (password === "") {
-                    alert("Vui lòng nhập Mật khẩu!");
-                    $('#tbPassword').focus();
-                    return;
+                    $('#errPassword').show();
+                    hasError = true;
+                } else {
+                    $('#errPassword').hide();
                 }
+
+                if (selectedSchool === "") {
+                    $('#errTruong').show();
+                    hasError = true;
+                } else {
+                    $('#errTruong').hide();
+                }
+
                 if (userInput === "") {
-                    alert("Vui lòng nhập mã xác nhận (Captcha)!");
-                    $('#txtCaptchaInput').focus();
+                    $('#errCaptcha').show();
+                    hasError = true;
+                } else {
+                    $('#errCaptcha').hide();
+                }
+
+                if (hasError) {
                     return;
                 }
 
